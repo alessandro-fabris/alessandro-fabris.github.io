@@ -33,12 +33,13 @@
 /* Modified: 05-Oct-2019/M.Jeusfeld  (CEURCCBY tag) */
 /* Modified: 30-Oct-2019/M.Jeusfeld  (write before Volnr disabled) */
 /* Modified: 03-Dec-2019/M.Jeusfeld  (print bg images) */
+/* Modified: 07-Nov-2022/M.Jeusfeld  (use https) */
 
 
 body {
 font-family: arial, sans-serif;
 font-size: medium;
-background-image: url(http://ceur-ws.org/ceurws-bg.png);
+background-image: url(https://ceur-ws.org/ceurws-bg.png);
 margin-left: +32px;
 margin-right: +8px;
 }
