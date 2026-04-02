@@ -1,220 +1,915 @@
 <!DOCTYPE html>
-<!--
-    Plain-Academic by Vasilios Mavroudis
-    Released under the Simplified BSD License/FreeBSD (2-clause) License.
-    https://github.com/mavroudisv/plain-academic
--->
-
 <html lang="en">
 <head>
-  <title>Alessandro Fabris</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
-  <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Alessandro Fabris - University of Trieste</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf9f7;
+      --surface: #f2f0ec;
+      --border: #e0dcd5;
+      --text: #1a1916;
+      --muted: #6b6760;
+      --accent: #2a4f7c;
+      --accent-light: #e8eef6;
+      --accent-mid: #b8cde0;
+      --gold: #8a6c2f;
+      --gold-light: #f5eedf;
+      --green: #2e5c3e;
+      --green-light: #e6f0ea;
+      --red-light: #f5e8e8;
+      --red: #7c2e2e;
+      --max-w: 760px;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+    .page { max-width: var(--max-w); margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+    /* ── Header ── */
+    .header {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .photo-wrap { position: relative; }
+    .photo-wrap img {
+      width: 120px;
+      height: 145px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 4px;
+      display: block;
+      border: 1px solid var(--border);
+    }
+    .photo-credit {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+      text-align: center;
+    }
+    .header-info { padding-top: 4px; }
+    .name {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .pronoun {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+    }
+    .role {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+    .role strong { color: var(--text); font-weight: 400; }
+
+    .links { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .link-pill {
+      font-size: 12px;
+      font-weight: 400;
+      padding: 4px 11px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--text);
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .link-pill:hover { background: var(--surface); border-color: #c9c5bf; }
+    .link-pill.primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    .link-pill.primary:hover { background: #1e3d61; }
+
+    .email {
+      font-size: 13px;
+      color: var(--muted);
+      font-variant-ligatures: none;
+    }
+
+    /* ── Section ── */
+    .section { margin-bottom: 2.5rem; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
+
+    /* ── Bio ── */
+    .bio { font-size: 14.5px; color: #333; line-height: 1.75; }
+    .bio p + p { margin-top: 0.85em; }
+    .bio a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ── Tags ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.1rem; }
+    .tag {
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 3px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid var(--accent-mid);
+      font-weight: 400;
+    }
+
+    /* ── Highlights ── */
+    .highlights { display: flex; flex-direction: column; gap: 0; }
+    .highlight {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .highlight:first-child { border-top: 1px solid var(--border); }
+    .hi-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .hi-award { background: var(--gold); }
+    .hi-service { background: var(--accent); }
+    .hi-press { background: var(--green); }
+    .highlight a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ── Publications ── */
+    .pub-filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.2rem; }
+    .filter-btn {
+      font-size: 12px;
+      padding: 3px 11px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: var(--font-body);
+    }
+    .filter-btn:hover { background: var(--surface); }
+    .filter-btn.active {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+
+    .pub {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .pub:first-of-type { border-top: 1px solid var(--border); }
+    .pub[data-hidden="true"] { display: none; }
+
+    .pub-title {
+      font-size: 14.5px;
+      font-weight: 500;
+      margin-bottom: 3px;
+      line-height: 1.45;
+    }
+    .pub-authors {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 300;
+    }
+    .pub-authors strong { color: var(--text); font-weight: 400; }
+    .pub-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .venue-badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .pub-note {
+      font-size: 12px;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .pub-note.award { color: var(--gold); font-style: normal; font-weight: 400; }
+    .pub-note.cite { color: var(--green); font-style: normal; }
+    .pub-links { display: flex; gap: 10px; margin-top: 7px; }
+    .pub-link {
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-mid);
+      padding-bottom: 1px;
+    }
+    .pub-link:hover { border-color: var(--accent); }
+    .pub-link.cite { color: var(--green); border-color: #9ec4ae; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer a { color: var(--muted); }
+
+    /* ── Responsive ── */
+    @media (max-width: 560px) {
+      .header { grid-template-columns: 90px 1fr; gap: 1.25rem; }
+      .photo-wrap img { width: 90px; height: 110px; }
+      .name { font-size: 1.6rem; }
+      .page { padding: 2rem 1.1rem 4rem; }
+    }
+    /* ── Teaching ── */
+    .teaching-list { display: flex; flex-direction: column; }
+    .teaching-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .teaching-item:first-child { border-top: 1px solid var(--border); }
+    .teaching-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .level-badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 3px;
+      letter-spacing: 0.02em;
+    }
+    .level-phd  { background: #ede8f5; color: #4a2d8a; border: 1px solid #c9b8e8; }
+    .level-msc  { background: var(--accent-light); color: var(--accent); border: 1px solid var(--accent-mid); }
+    .level-bsc  { background: var(--green-light); color: var(--green); border: 1px solid #9ec4ae; }
+    .teaching-year { font-size: 12px; color: var(--muted); }
+    .teaching-title { font-size: 14.5px; font-weight: 500; margin-bottom: 3px; }
+    .teaching-module { font-size: 13px; font-weight: 300; color: var(--muted); }
+    .teaching-detail { font-size: 13px; color: var(--muted); font-weight: 300; }
+
+    /* ── Supervision ── */
+    .supervision-block { margin-bottom: 1.25rem; }
+    .supervision-level {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+    }
+    .supervisee {
+      display: grid;
+      grid-template-columns: 160px 1fr auto;
+      align-items: baseline;
+      gap: 0 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .supervisee:last-of-type { border-bottom: none; }
+    .supervisee-name { font-weight: 500; flex-shrink: 0; }
+    .supervisee-detail { font-size: 13px; color: var(--muted); font-weight: 300; }
+    .supervisee-badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .supervisee-badge.current { background: var(--gold-light); color: var(--gold); border: 1px solid #d9c08a; }
+    .open-positions {
+      margin-top: 1.25rem;
+      margin-bottom: 1.25rem;
+      padding: 14px 16px;
+      background: var(--accent-light);
+      border: 1px solid var(--accent-mid);
+      border-radius: 4px;
+    }
+    .open-positions-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .open-positions p { font-size: 13.5px; color: #2a3d52; line-height: 1.65; }
+
+    /* ── Section nav ── */
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 2.5rem;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-link {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 4px 11px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
+    }
+    .nav-link:hover {
+      color: var(--text);
+      background: var(--surface);
+      border-color: var(--border);
+    }
+    .nav-link.active {
+      color: var(--text);
+      background: var(--surface);
+      border-color: var(--border);
+      font-weight: 500;
+    }
+
+    /* ── Academic Service ── */
+    .service-block { margin-bottom: 1.25rem; }
+    .service-level {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+    }
+    .service-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 12px;
+      align-items: baseline;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .service-item:last-of-type { border-bottom: none; }
+    .service-role { font-weight: 500; font-size: 13.5px; }
+    .service-venue { font-size: 13px; color: var(--muted); font-weight: 300; }
+    .service-venue a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+    .service-award {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 1px 6px;
+      border-radius: 3px;
+      background: var(--gold-light);
+      color: var(--gold);
+      border: 1px solid #d9c08a;
+      vertical-align: middle;
+      margin-left: 5px;
+      font-style: normal;
+    }
+    .service-prose {
+      font-size: 13.5px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.7;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+  </style>
 </head>
-<style>
-
-</style>
 <body>
+<div class="page">
 
+  <!-- ── Header ── -->
+  <div class="header">
+    <div class="photo-wrap">
+      <img src="DSH_8217.jpg" alt="Alessandro Fabris">
+      <div class="photo-credit">Ph. Darya Shramko</div>
+    </div>
+    <div class="header-info">
+      <div class="name">Alessandro Fabris <span class="pronoun">(he/him)</span></div>
+      <div class="role">
+        Assistant Professor, Tenure-track (RTT)<br>
+        <strong>University of Trieste</strong>, Italy
+      </div>
+      <div class="links">
+        <a class="link-pill" href="https://scholar.google.com/citations?user=WjJVK94AAAAJ&hl=en">Google Scholar</a>
+        <a class="link-pill" href="https://www.linkedin.com/in/alessandro-fabris-78ab32aa/">LinkedIn</a>
+        <a class="link-pill" href="https://orcid.org/0000-0001-6108-9940">ORCID</a>
+        <a class="link-pill" href="https://dblp.uni-trier.de/pid/201/7221.html">DBLP</a>
+      </div>
+      <div class="email">alessandro dot fabris at units dot it</div>
+    </div>
+  </div>
 
-<!-- Navigation -->
-<!-- 	<nav class="navbar navbar-inverse navbar-static-top " role="navigation">
-	  <div class="container">
-		<div class="navbar-header">
-		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-		</div>
+  <!-- ── Nav ── -->
+  <nav class="section-nav" aria-label="Page sections">
+    <a class="nav-link" href="#about">About</a>
+    <a class="nav-link" href="#teaching">Teaching</a>
+    <a class="nav-link" href="#supervision">Supervision</a>
+    <a class="nav-link" href="#publications">Publications</a>
+    <a class="nav-link" href="#service">Service</a>
+  </nav>
 
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		  <ul class="nav navbar-nav">
-				  <li><a href="index.html">Home</a></li>
-				  <li><a href="#news">News</a></li>
-				  <li><a href="#publications">Publications</a></li> 
-		  </ul>
-		</div>
-	  </div>
-	</nav> -->
-  
-  <!-- Page Content -->
-    <div class="container">
+  <!-- ── About ── -->
+  <div class="section" id="about">
+    <div class="section-header">
+      <div class="section-title">About</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="tags">
+      <span class="tag">Algorithmic fairness</span>
+      <span class="tag">Responsible AI</span>
+      <span class="tag">Data governance</span>
+      <span class="tag">AI Act &amp; DSA</span>
+      <span class="tag">Quantification</span>
+    </div>
+    <div class="bio">
+      <p>I am a tenure-track assistant professor at the University of Trieste, where I study algorithmic fairness, responsible AI, and data governance. My research centers on defining, operationalizing, and measuring fairness, with a focus on domain-specific requirements and a critical perspective on data governance and ethics.</p>
+      <p>I co-founded the <a href="https://eaaf.ewaf.org/about-us">European Association for Algorithmic Fairness</a>, which organizes the yearly <a href="https://2026.ewaf.org/">European Conference for Algorithmic Fairness</a>. I am currently especially engaged with the AI Act, the DSA, and their practical implementation.</p>
+      <p>Previously, I spent four years in industry at IBM and Electrolux and two years as a postdoc at the Max Planck Institute for Security and Privacy. I enjoy working across disciplines and using mixed methods to tackle complex socio-technical questions; if you're interested in collaborating, feel free to reach out.</p>
+      <p>My work has been recognised with a <a href="https://www.mpi-sp.org/56387/news_publication_20952686_transferred?c=6054">Humboldt Research Fellowship</a>, the <a href="https://www.alumniunipd.it/cornaro/">Elena Cornaro Award</a> for gender studies, the <a href="https://www.sciencedirect.com/journal/information-processing-and-management/about/news/ipm-2020-phd-paper-award-winner">IP&amp;M Best Ph.D. Paper Award</a>, and the <a href="https://www.linkedin.com/posts/ecir-conf_ecir2026-informationretrieval-peerreview-ugcPost-7444362976096194561-fxXO"> ECIR Senior Program Commitee Member Award </a>. My research on algorithmic hiring has been cited by the <a href="https://www.europarl.europa.eu/thinktank/en/document/EPRS_ATA(2025)769509">European Parliament Research Service</a>, and my work on discrimination in car insurance has been featured in national TV (<a href="https://www.rai.it/programmi/report/inchieste/Il-calcolo-opaco-c246caca-7c9a-42e9-ba88-de3f1b58e457.html">Rai3</a>) and international press (<a href="https://algorithmwatch.org/en/discriminating-insurance/">AlgorithmWatch</a>).</p>
+    </div>
+  </div>
 
-        <div class="row">
+  <!-- ── Teaching ── -->
+  <div class="section" id="teaching">
+    <div class="section-header">
+      <div class="section-title">Teaching</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="teaching-list">
 
-            <!-- Entries Column -->
-            <div class="col-md-4" >
-                
-                <!-- Main Image -->
-                <img class="img-responsive" src="DSH_8217.jpg" alt="">
-				<p style="color:gray">Ph.Darya Shramko</p>
-            </div> 
-
-            <!-- Contact Info on the Sidebar -->
-            <div class="col-md-4">
-                <div style="font-family: 'Oswald', sans-serif; font-size: 32px;"><b>Alessandro Fabris (he/him)</b></div><br>
-                <p> University of Trieste (<b>UniTs</b>), Italy<br>
-				Assistant Professor, Tenure-track (RTT) <br></p>
-				<p><b>alessandro dot fabris at units dot it</b><br>
-                </p>
-				<dd><a href="https://scholar.google.com/citations?user=WjJVK94AAAAJ&hl=en">Google Scholar</a></dd> 
-                <dd><a href="https://www.linkedin.com/in/alessandro-fabris-78ab32aa/">LinkedIn</a></dd>
-            </div>
-            
-            
-            <!-- Links on the Sidebar -->
-		</div>	
-		
-		<div class="row">
-			<div class="col-md-8" >
-                
-                <div style="margin-top:3%; text-align:justify;">                
-					<p> I am an assistant professor (tenure track -- RTT) of computer science at the University of Trieste. I study algorithmic fairness and auditing of artificial intelligence systems. My research centers on defining, operationalizing, and measuring fairness, with a focus on domain-specific requirements, and a critical perspective on data management and ethics.</p>
-					<p> I enjoy working across disciplines and using mixed methods to tackle complex socio-technical questions. I feel fortunate to collaborate with scholars from a variety of fields. If you're interested in working together, feel free to reach out! I'm currently especially engaged with the AI Act and its practical implementation. </p>
-					<p> Previously, I spent four years in industry at IBM and Electrolux and two years at the Max Planck Institute for Security and Privacy, where I was advised by Asia Biega. My goal is to support responsible computing by translating policy into actionable practices that practitioners can understand and apply. </p>
-                </div>
-            </div> 
-            
-		</div>	
-		
-		<div class="row">
-            
-            <!-- Publications -->
-			<div class="col-md-8">    
-                <h2 id="news">News</h2>
-				<p><i class="fa fa-users"></i> I am serving as a <a href="https://facctconference.org/2025/cft">tutorial chair at FAccT 2025</a>. </p>
-				<p><i class="fa fa-university"></i> I joined the University of Trieste as a tenure-track assistant professor. </p>
-				<p><i class="fa fa-users"></i> The <a href="https://2024.ewaf.org/">3rd European Workshop on Algorithmic Fairness</a> took place in Mainz, Germany, on July 1-3, 2024. See you next year at <a href="https://2025.ewaf.org/">EWAF'25</a>! </p>
-				<p><i class="fa fa-trophy"></i> I have been granted a <a href="https://www.mpi-sp.org/56387/news_publication_20952686_transferred?c=6054">Humboldt Research Fellowship</a> to study algorithmic fairness with limited data. </p>
-				<p><i class="fa fa-trophy"></i> My Ph.D. thesis received the <a href="https://www.alumniunipd.it/cornaro/">Elena Cornaro Award</a> for gender studies. </p>
-				<p><i class="fa fa-certificate"></i> We advised five AI providers on compliance at the <a href="https://www.thegrandchallenge.eu/about">EU AI Act Grand Challenge</a>. </p>
-				<p><i class="fa fa-automobile"></i> Our research on discrimination in car insurance was featured on national TV (<a href="https://www.rai.it/programmi/report/inchieste/Il-calcolo-opaco-c246caca-7c9a-42e9-ba88-de3f1b58e457.html">Rai3</a>) and international press (<a href="https://algorithmwatch.org/en/discriminating-insurance/">AlgorithmWatch</a>). </p>
-				<p><i class="fa fa-users"></i> The <a href="https://sites.google.com/view/ewaf23/">2nd European Workshop on Algorithmic Fairness</a> took place in June 2023 and I was a Program Chair. We had a really exciting program (if I may say so myself)! </p>
-				<p><i class="fa fa-book"></i> Our <a href="https://doi.org/10.1007/978-3-031-20467-8">book</a> on quantification is out. Have a look if you're interested in estimators for groups rather than individuals. </p>
-				<p><i class="fa fa-graduation-cap"></i> I successfully defended my Ph.D. I am now a postdoctoral researcher at Max Planck Institute for Security and Privacy. </p>
-				<p><i class="fa fa-trophy"></i> I received the <a href="https://www.journals.elsevier.com/information-processing-and-management/news/ipm-2020-phd-paper-award-winner">IP&M Best Ph.D. Paper Award</a>. </p>
-            </div>
-			
-            <div class="col-md-8">    
-                <h2 id="publications">Selected publications</h2>
-                <ul style="list-style-type: none; margin: 0; padding: 0">
-				<li>
-                <em>Underrepresentation, Label Bias, and Proxies: Towards Data Bias Profiles for the EU AI Act and Beyond</em><br>
-                Marina Ceccon, Giandomenico Cornacchia, Davide Dalle Pezze, Alessandro Fabris, Gian Antonio Susto <br>
-				(<strong>ESWA 2025</strong>) Expert Systems with Applications  <br>
-				<a href="papers/eswa2025.pdf">[PDF]</a> <a href="papers/eswa2025.bib">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>Multi-Label Continual Learning for the Medical Domain: A Novel Benchmark</em><br>
-                Marina Ceccon, Davide Dalle Pezze, Alessandro Fabris, Gian Antonio Susto <br>
-				(<strong>WACV 2025</strong>) The IEEE/CVF Winter Conference on Applications of Computer Vision <br>
-				<a href="papers/wacv2025.pdf">[PDF]</a> <a href="papers/wacv2025.bib">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>Fairness and Bias in Algorithmic Hiring: a Multidisciplinary Survey</em><br>
-                Alessandro Fabris, Nina Baranowska, Matthew J. Dennis, David Graus, Philipp Hacker, Jorge Saldivar, Frederik Zuiderveen Borgesius, Asia J. Biega <br>
-				(<strong>TIST 2025</strong>) ACM Transactions on Intelligent Systems and Technology  <br>
-				<i class="fa fa-link"></i> Cited by the <a href="https://www.europarl.europa.eu/thinktank/en/document/EPRS_ATA(2025)769509">European Parliament Research Service</a>.<br>
-				<i class="fa fa-newspaper-o"></i> <a href="https://montrealethics.ai/fairness-and-bias-in-algorithmic-hiring/">MAIEI invited piece</a>.<br>
-				<a href="papers/tist2025.pdf">[PDF]</a> <a href="papers/tist2025.bib">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>The Venus score for the assessment of the quality and trustworthiness of biomedical datasets</em><br>
-                Davide Chicco, Alessandro Fabris, Giuseppe Jurman  <br>
-				(<strong>BioData Mining 2025</strong>)<br>
-				<a href="papers/biodatamining2025.pdf">[PDF]</a> <a href="">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>Artificial Intelligence across Europe: A Study on Awareness, Attitude and Trust</em><br>
-                Teresa Scantamburlo, Atia Cortés, Francesca Foffano, Cristian Barrué, Veronica Distefano, Long Pham, Alessandro Fabris <br>
-				(<strong>TAI 2024</strong>) IEEE Transactions on Artificial Intelligence, to appear  <br>
-				<a href="papers/tai2024.pdf">[PDF]</a> <a href="">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>Lazy Data Practices Harm Fairness Research</em><br>
-                Jan Simson, Alessandro Fabris, Christoph Kern <br>
-				(<strong>FAccT 2024</strong>) The 7th ACM Conference on Fairness, Accountability, and Transparency  <br>
-				<a href="papers/facct2024.pdf">[PDF]</a> <a href="papers/facct2024.bib">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>Learning to Quantify</em><br>
-                Andrea Esuli, Alessandro Fabris, Alejandro Moreo, Fabrizio Sebastiani <br>
-				(<strong>IRS 2023</strong>) The Information Retrieval Series 47, Springer <br>
-				<a href="papers/irs2023.pdf">[PDF]</a> <a href="papers/irs2023.bib">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>Measuring Fairness Under Unawareness of Sensitive Attributes: A Quantification-Based Approach</em><br>
-                Alessandro Fabris, Andrea Esuli, Alejandro Moreo, Fabrizio Sebastiani <br>
-				(<strong>JAIR 2023</strong>) Journal of Artificial Intelligence Research, vol 76 <br>
-				<a href="papers/jair2023.pdf">[PDF]</a> <a href="papers/jair2023.bib">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>Pairwise Fairness in Ranking as a Dissatisfaction Measure</em><br>
-                Alessandro Fabris, Gianmaria Silvello, Gian Antonio Susto, Asia J. Biega <br>
-				(<strong>WSDM 2023</strong>) The 16th ACM International Conference on Web Search and Data Mining <br>
-				<a href="papers/wsdm2023.pdf">[PDF]</a> <a href="papers/wsdm2023.bib">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>Algorithmic Fairness Datasets: the Story so Far</em><br>
-                Alessandro Fabris, Stefano Messina, Gianmaria Silvello, Gian Antonio Susto <br>
-				(<strong>DAMI 2022</strong>) Data Mining and Knowledge Discovery, vol 36 <br>
-				<i class="fa fa-search"></i> <a href="http://fairnessdata.dei.unipd.it/">Webapp</a> released.<br>
-				<a href="papers/dami2022.pdf">[PDF]</a> <a href="papers/dami2022.bib">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>Tackling Documentation Debt: A Survey on Algorithmic Fairness Datasets</em><br>
-                Alessandro Fabris, Stefano Messina, Gianmaria Silvello, Gian Antonio Susto <br>
-				(<strong>EAAMO 2022</strong>) The 2nd ACM Conference on Equity and Access in Algorithms, Mechanisms, and Optimization <br>
-				<a href="papers/eaamo2022.pdf">[PDF]</a> <a href="papers/eaamo2022.bib">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>Algorithmic Audit of Italian Car Insurance: Evidence of Unfairness in Access and Pricing</em><br>
-                Alessandro Fabris, Alan Mishler, Stefano Gottardi, Mattia Carletti, Matteo Daicampi, Gian Antonio Susto, Gianmaria Silvello <br>
-				(<strong>AIES 2021</strong>) The 4th AAAI /ACM Conference on Artificial Intelligence, Ethics, and Society <br>
-				<i class="fa fa-newspaper-o"></i> <a href="https://www.asgi.it/discriminazioni/discriminazioni-e-polizze-assicurative/">National</a> and  <a href="https://algorithmwatch.org/en/discriminating-insurance/">international</a> press coverage.<br>
-				<p><i class="fa fa-television"></i> <a href="https://www.rai.it/programmi/report/inchieste/Il-calcolo-opaco-c246caca-7c9a-42e9-ba88-de3f1b58e457.html">National TV</a>: Report Rai3.<br>
-				<a href="papers/aies2021.pdf">[PDF]</a> <a href="papers/aies2021.bib">[BIB]</a> <br>
-				</li>
-				<br>
-				<li>
-                <em>Gender Stereotype Reinforcement: Measuring the Gender Bias Conveyed by Ranking Algorithms.</em><br>
-                Alessandro Fabris, Alberto Purpura, Gianmaria Silvello, Gian Antonio Susto <br>
-				(<strong>IPM 2020</strong>) Information Processing & Management, vol 57 <br>
-				<i class="fa fa-trophy"></i> <a href="https://www.journals.elsevier.com/information-processing-and-management/news/ipm-2020-phd-paper-award-winner">IP&M Best Ph.D. Paper Award</a> <br>
-				<a href="papers/ipm2020.pdf">[PDF]</a> <a href="papers/ipm2020.bib">[BIB]</a> <br>
-				</li>
-				<br>
-				</ul>
-            </div>
-            
+      <div class="teaching-item">
+        <div class="teaching-meta">
+          <span class="level-badge level-bsc">B.Sc.</span>
+          <span class="teaching-year">2025–26</span>
         </div>
+        <div class="teaching-title">Architetture degli Elaboratori e Sistemi Operativi <span class="teaching-module">(module: Computer Architectures)</span></div>
+        <div class="teaching-detail">Course Teacher · 24 hrs, 3 CFU · University of Trieste, B.Sc. in Artificial Intelligence and Data Analytics</div>
+      </div>
 
+      <div class="teaching-item">
+        <div class="teaching-meta">
+          <span class="level-badge level-msc">M.Sc.</span>
+          <span class="teaching-year">2025–26</span>
+        </div>
+        <div class="teaching-title">Symbolic &amp; Reliable AI <span class="teaching-module">(module: Reliable AI)</span></div>
+        <div class="teaching-detail">Course Teacher · 24 hrs, 3 CFU · University of Trieste, M.Sc. in Data Science and Artificial Intelligence</div>
+      </div>
+
+      <div class="teaching-item">
+        <div class="teaching-meta">
+          <span class="level-badge level-msc">M.Sc.</span>
+          <span class="teaching-year">2025–26, 2024–25</span>
+        </div>
+        <div class="teaching-title">Information Retrieval &amp; Data Visualization <span class="teaching-module">(module: Data Visualization)</span></div>
+        <div class="teaching-detail">Course Teacher · 24 hrs, 3 CFU · University of Trieste, M.Sc. in Data Science and Artificial Intelligence</div>
+      </div>
+
+      <div class="teaching-item">
+        <div class="teaching-meta">
+          <span class="level-badge level-phd">Ph.D.</span>
+          <span class="teaching-year">2024–25</span>
+        </div>
+        <div class="teaching-title">Fairness, Accountability &amp; Transparency (FATE) in AI</div>
+        <div class="teaching-detail">Course Leader · 18 hrs · University of Padova, Ph.D. in Information Engineering · Invited as external expert</div>
+      </div>
 
     </div>
-    <!-- /.container -->
-    
-    <!-- Other people may like it too! -->
-    <a style="color:#b5bec9;font-size:0.8em; float:right;" href="https://github.com/mavroudisv/plain-academic">Plain Academic</a> 
-    
-</body>
+  </div>
 
+  <!-- ── Supervision ── -->
+  <div class="section" id="supervision">
+    <div class="section-header">
+      <div class="section-title">Supervision</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="open-positions">
+      <div class="open-positions-title">Open positions</div>
+      <p>I am looking for motivated Ph.D. and M.Sc. students interested in algorithmic fairness, responsible AI, and data governance. I am glad to host visiting students and researchers. All students at the University of Trieste are also welcome to get in touch about thesis topics in these areas. If you are interested in working together, please reach out by email with a brief summary of your work (e.g. your CV) and description of your research interests.</p>
+    </div>
+
+    <div class="supervision-block">
+      <div class="supervision-level">Doctoral</div>
+      <div class="supervisee">
+        <div class="supervisee-name">Marina Ceccon</div>
+        <div class="supervisee-detail">Ph.D. in Information Engineering, University of Padova · Algorithmic fairness in lifelong and distributed learning · 2023–present · Co-supervised with G.A. Susto</div>
+      </div>
+    </div>
+
+    <div class="supervision-block">
+      <div class="supervision-level">Master's</div>
+      <div class="supervisee">
+        <div class="supervisee-name">Marina Ceccon</div>
+        <div class="supervisee-detail">M.Sc. in Computer Engineering, University of Padova · "Continual Learning and Fairness Techniques for Pathology Classification of Chest X-ray Images" · 2022 · Co-supervised with G.A. Susto</div>
+      </div>
+      <div class="supervisee">
+        <div class="supervisee-name">Alberto Piva</div>
+        <div class="supervisee-detail">M.Sc. in Computer Engineering, University of Padova · "A Web Application for Searching Fairness Datasets" · 2022 · Co-supervised with G. Silvello</div>
+      </div>
+      <div class="supervisee">
+        <div class="supervisee-name">Stefano Messina</div>
+        <div class="supervisee-detail">M.Sc. in Computer Engineering, University of Padova · "Fairness Datasets: a Comprehensive Survey of the Collections Employed in Algorithmic Fairness Research" · 2021 · Co-supervised with G.A. Susto</div>
+      </div>
+      <div class="supervisee">
+        <div class="supervisee-name">Stefano Gottardi</div>
+        <div class="supervisee-detail">M.Sc. in Automation Engineering, University of Padova · "A Fairness Analysis in Italian Car Insurance Pricing" · 2021 · Co-supervised with G.A. Susto</div>
+      </div>
+      <div class="supervisee">
+        <div class="supervisee-name">Davide Biasion</div>
+        <div class="supervisee-detail">M.Sc. in Computer Engineering, University of Padova · "Gender Bias in Italian Word Embeddings" · 2020 · Co-supervised with G.A. Susto</div>
+      </div>
+    </div>
+
+    <div class="supervision-block">
+      <div class="supervision-level">Bachelor's</div>
+      <div class="supervisee">
+        <div class="supervisee-name">Alessio Martucci</div>
+        <div class="supervisee-detail">B.Sc. in Artificial Intelligence and Data Science, University of Trieste · "Complessità, Accuratezza e Fairness nei Sistemi AI per la Giustizia Penale e per la Polizia Predittiva" · 2026</div>
+      </div>
+      <div class="supervisee">
+        <div class="supervisee-name">Alina Fogar</div>
+        <div class="supervisee-detail">B.Sc. in Artificial Intelligence and Data Science, University of Trieste · "Fairness negli algoritmi di Machine Learning: il Problema della Generalizzazione" · 2025 · Co-supervised with L. Manzoni</div>
+      </div>
+      <div class="supervisee">
+        <div class="supervisee-name">Francesco Pio Monaco</div>
+        <div class="supervisee-detail">B.Sc. in Information Engineering, University of Padova · "Bias negli Algoritmi di Machine Learning. Il Caso degli Algoritmi per l'Assistenza Sanitaria negli Stati Uniti" · 2022 · Co-supervised with G.A. Susto</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Publications ── -->
+  <div class="section" id="publications">
+    <div class="section-header">
+      <div class="section-title">Selected publications</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="pub-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="fairness">Fairness</button>
+      <button class="filter-btn" data-filter="data">Data &amp; Datasets</button>
+      <button class="filter-btn" data-filter="quantification">Quantification</button>
+      <button class="filter-btn" data-filter="information-access">Information Access</button>
+      <button class="filter-btn" data-filter="rai">Responsible AI</button>
+    </div>
+
+    <div class="pub" data-tags="fairness information-access">
+      <div class="pub-title">Does fair ranking lead to fair recruitment outcomes? A study of interventions, interfaces, and interactions</div>
+      <div class="pub-authors"><strong>Alessandro Fabris</strong>, C. Rus, J. Saldivar, A. Gatzioura, A. Biega, C. Castillo</div>
+      <div class="pub-meta">
+        <span class="venue-badge">IPM 2026</span>
+        <span class="pub-note">Information Processing &amp; Management</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/ipm2026.pdf">PDF</a>
+        <a class="pub-link" href="papers/ipm2026.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="fairness quantification information-access">
+      <div class="pub-title">Quantifying Query Fairness Under Unawareness</div>
+      <div class="pub-authors">T. Jänich, A. Moreo, <strong>Alessandro Fabris</strong>, G. McDonald, A. Esuli, I. Ounis, F. Sebastiani</div>
+      <div class="pub-meta">
+        <span class="venue-badge">JAIR 2026</span>
+        <span class="pub-note">Journal of Artificial Intelligence Research</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/jair2026.pdf">PDF</a>
+        <a class="pub-link" href="papers/jair2026.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="data">
+      <div class="pub-title">Experience: Bridging Data Measurement and Ethical Challenges with Extended Data Briefs</div>
+      <div class="pub-authors">M. Rondina, A. Vetrò, <strong>Alessandro Fabris</strong>, G. Silvello, G. A. Susto, M. Torchiano, J.C. De Martin</div>
+      <div class="pub-meta">
+        <span class="venue-badge">JDIQ 2025</span>
+        <span class="pub-note">ACM Journal of Data and Information Quality</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/jdiq2025.pdf">PDF</a>
+        <a class="pub-link" href="papers/jdiq2025.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="fairness data">
+      <div class="pub-title">Underrepresentation, Label Bias, and Proxies: Towards Data Bias Profiles for the EU AI Act and Beyond</div>
+      <div class="pub-authors">Marina Ceccon, Giandomenico Cornacchia, Davide Dalle Pezze, <strong>Alessandro Fabris</strong>, Gian Antonio Susto</div>
+      <div class="pub-meta">
+        <span class="venue-badge">ESWA 2025</span>
+        <span class="pub-note">Expert Systems with Applications</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/eswa2025.pdf">PDF</a>
+        <a class="pub-link" href="papers/eswa2025.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="fairness">
+      <div class="pub-title">Fairness and Bias in Algorithmic Hiring: a Multidisciplinary Survey</div>
+      <div class="pub-authors"><strong>Alessandro Fabris</strong>, Nina Baranowska, Matthew J. Dennis, David Graus, Philipp Hacker, Jorge Saldivar, Frederik Zuiderveen Borgesius, Asia J. Biega</div>
+      <div class="pub-meta">
+        <span class="venue-badge">TIST 2025</span>
+        <span class="pub-note">ACM Transactions on Intelligent Systems and Technology</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/tist2025.pdf">PDF</a>
+        <a class="pub-link" href="papers/tist2025.bib">BIB</a>
+        <a class="pub-link" href="https://montrealethics.ai/fairness-and-bias-in-algorithmic-hiring/">MAIEI piece ↗</a>
+        <a class="pub-link cite" href="https://www.europarl.europa.eu/thinktank/en/document/EPRS_ATA(2025)769509">Cited by European Parliament ↗</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="data">
+      <div class="pub-title">The Venus score for the assessment of the quality and trustworthiness of biomedical datasets</div>
+      <div class="pub-authors">Davide Chicco, <strong>Alessandro Fabris</strong>, Giuseppe Jurman</div>
+      <div class="pub-meta">
+        <span class="venue-badge">BDM 2025</span>
+        <span class="pub-note">BioData Mining 2025</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/biodatamining2025.pdf">PDF</a>
+		<a class="pub-link" href="papers/biodatamining2025.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="rai">
+      <div class="pub-title">Artificial Intelligence across Europe: A Study on Awareness, Attitude and Trust</div>
+      <div class="pub-authors">T. Scantamburlo, A. Cortés, F. Foffano, C. Barrué, V. Distefano, L. Pham, <strong>Alessandro Fabris</strong></div>
+      <div class="pub-meta">
+        <span class="venue-badge">TAI 2025</span>
+        <span class="pub-note">IEEE Transactions on Artificial Intelligence</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/tai2025.pdf">PDF</a>
+        <a class="pub-link" href="papers/tai2025.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="data">
+      <div class="pub-title">Multi-Label Continual Learning for the Medical Domain: A Novel Benchmark</div>
+      <div class="pub-authors">M. Ceccon, D. Dalle Pezze, <strong>Alessandro Fabris</strong>, G. A. Susto</div>
+      <div class="pub-meta">
+        <span class="venue-badge">WACV 2025</span>
+        <span class="pub-note">IEEE/CVF Winter Conference on Applications of Computer Vision</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/wacv2025.pdf">PDF</a>
+        <a class="pub-link" href="papers/wacv2025.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="fairness data">
+      <div class="pub-title">Lazy Data Practices Harm Fairness Research</div>
+      <div class="pub-authors">Jan Simson, <strong>Alessandro Fabris</strong>, Christoph Kern</div>
+      <div class="pub-meta">
+        <span class="venue-badge">FAccT 2024</span>
+        <span class="pub-note">ACM Conference on Fairness, Accountability, and Transparency</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/facct2024.pdf">PDF</a>
+        <a class="pub-link" href="papers/facct2024.bib">BIB</a>
+      </div>
+    </div>
+	
+	<div class="pub" data-tags="rai">
+      <div class="pub-title">Software Systems Compliance with the AI Act: Lessons Learned from an International Challenge</div>
+      <div class="pub-authors">Teresa Scantamburlo, Paolo Falcarin, Alberto Veneri, <strong>Alessandro Fabris</strong>, Chiara Gallese, Valentina Billa, Francesca Rotolo, Federico Marcuzzi</div>
+      <div class="pub-meta">
+        <span class="venue-badge">RAIE@ICSE 2024</span>
+        <span class="pub-note">IEEE/ACM International Workshop on Responsible AI Engineering</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/raie2024.pdf">PDF</a>
+        <a class="pub-link" href="papers/raie2024.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="quantification">
+      <div class="pub-title">Learning to Quantify</div>
+      <div class="pub-authors">Andrea Esuli, <strong>Alessandro Fabris</strong>, Alejandro Moreo, Fabrizio Sebastiani</div>
+      <div class="pub-meta">
+        <span class="venue-badge">IRS 2023</span>
+        <span class="pub-note">The Information Retrieval Series 47, Springer</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/irs2023.pdf">PDF</a>
+        <a class="pub-link" href="papers/irs2023.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="fairness quantification">
+      <div class="pub-title">Measuring Fairness Under Unawareness of Sensitive Attributes: A Quantification-Based Approach</div>
+      <div class="pub-authors"><strong>Alessandro Fabris</strong>, Andrea Esuli, Alejandro Moreo, Fabrizio Sebastiani</div>
+      <div class="pub-meta">
+        <span class="venue-badge">JAIR 2023</span>
+        <span class="pub-note">Journal of Artificial Intelligence Research, vol 76</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/jair2023.pdf">PDF</a>
+        <a class="pub-link" href="papers/jair2023.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="fairness information-access">
+      <div class="pub-title">Pairwise Fairness in Ranking as a Dissatisfaction Measure</div>
+      <div class="pub-authors"><strong>Alessandro Fabris</strong>, Gianmaria Silvello, Gian Antonio Susto, Asia J. Biega</div>
+      <div class="pub-meta">
+        <span class="venue-badge">WSDM 2023</span>
+        <span class="pub-note">ACM International Conference on Web Search and Data Mining</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/wsdm2023.pdf">PDF</a>
+        <a class="pub-link" href="papers/wsdm2023.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="data fairness">
+      <div class="pub-title">Algorithmic Fairness Datasets: the Story so Far</div>
+      <div class="pub-authors"><strong>Alessandro Fabris</strong>, Stefano Messina, Gianmaria Silvello, Gian Antonio Susto</div>
+      <div class="pub-meta">
+        <span class="venue-badge">DAMI 2022</span>
+        <span class="pub-note">Data Mining and Knowledge Discovery, vol 36</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/dami2022.pdf">PDF</a>
+        <a class="pub-link" href="papers/dami2022.bib">BIB</a>
+        <a class="pub-link" href="http://fairnessdata.dei.unipd.it/">Webapp ↗</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="data fairness">
+      <div class="pub-title">Tackling Documentation Debt: A Survey on Algorithmic Fairness Datasets</div>
+      <div class="pub-authors"><strong>Alessandro Fabris</strong>, Stefano Messina, Gianmaria Silvello, Gian Antonio Susto</div>
+      <div class="pub-meta">
+        <span class="venue-badge">EAAMO 2022</span>
+        <span class="pub-note">ACM Conference on Equity and Access in Algorithms, Mechanisms, and Optimization</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/eaamo2022.pdf">PDF</a>
+        <a class="pub-link" href="papers/eaamo2022.bib">BIB</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="fairness">
+      <div class="pub-title">Algorithmic Audit of Italian Car Insurance: Evidence of Unfairness in Access and Pricing</div>
+      <div class="pub-authors"><strong>Alessandro Fabris</strong>, Alan Mishler, Stefano Gottardi, Mattia Carletti, Matteo Daicampi, Gian Antonio Susto, Gianmaria Silvello</div>
+      <div class="pub-meta">
+        <span class="venue-badge">AIES 2021</span>
+        <span class="pub-note">AAAI/ACM Conference on AI, Ethics, and Society</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/aies2021.pdf">PDF</a>
+        <a class="pub-link" href="papers/aies2021.bib">BIB</a>
+        <a class="pub-link" href="https://algorithmwatch.org/en/discriminating-insurance/">Press ↗</a>
+      </div>
+    </div>
+
+    <div class="pub" data-tags="fairness information-access">
+      <div class="pub-title">Gender Stereotype Reinforcement: Measuring the Gender Bias Conveyed by Ranking Algorithms</div>
+      <div class="pub-authors"><strong>Alessandro Fabris</strong>, Alberto Purpura, Gianmaria Silvello, Gian Antonio Susto</div>
+      <div class="pub-meta">
+        <span class="venue-badge">IPM 2020</span>
+      </div>
+      <div class="pub-links">
+        <a class="pub-link" href="papers/ipm2020.pdf">PDF</a>
+        <a class="pub-link" href="papers/ipm2020.bib">BIB</a>
+        <a class="pub-link" href="https://www.sciencedirect.com/journal/information-processing-and-management/about/news/ipm-2020-phd-paper-award-winner">IP&amp;M Best Ph.D. Paper Award ↗</a>
+      </div>
+    </div>
+
+  </div><!-- /section -->
+
+  <!-- ── Academic Service ── -->
+  <div class="section" id="service">
+    <div class="section-header">
+      <div class="section-title">Academic service</div>
+      <div class="section-line"></div>
+    </div>
+	
+	<div class="service-block">
+      <div class="service-level">Steering committee</div>
+      <div class="service-item">
+        <div class="service-role">Board Member</div>
+        <div class="service-venue">European Association for Algorithmic Fairness — <a href="https://eaaf.ewaf.org/">EAAF</a></div>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <div class="service-level">Program Co-chair</div>
+      <div class="service-item">
+        <div class="service-role">Tutorial Chair</div>
+        <div class="service-venue">ACM Conference on Fairness, Accountability, and Transparency — <a href="https://facctconference.org/2025/committees">FAccT 2025</a></div>
+      </div>
+      <div class="service-item">
+        <div class="service-role">Program Chair</div>
+        <div class="service-venue">European Workshop on Algorithmic Fairness — EWAF 2023</div>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <div class="service-level">Area chair / Senior PC</div>
+      <div class="service-item">
+        <div class="service-role">Senior PC member <span class="service-award">Award</span></div>
+        <div class="service-venue">European Conference on Information Retrieval — ECIR 2026</div>
+      </div>
+      <div class="service-item">
+        <div class="service-role">Area Chair</div>
+        <div class="service-venue">European Workshop on Algorithmic Fairness — EWAF 2024–2025</div>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <div class="service-level">Editorial</div>
+      <div class="service-item">
+        <div class="service-role">Editorial Review Board member</div>
+        <div class="service-venue">ACM Journal of Data and Information Quality — <a href="https://dl.acm.org/journal/jdiq">JDIQ</a></div>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <div class="service-level">Program committee</div>
+      <div class="service-prose">
+        I regularly serve on the program committees of top ML, AI, and IR conferences, including FAccT, WWW, ECIR, NeurIPS, ECML PKDD, WSDM, CIKM, and RecSys, as well as specialised workshops on algorithmic fairness and quantification.
+      </div>
+    </div>
+
+  </div><!-- /section -->
+
+  <footer>
+    <span>Alessandro Fabris · University of Trieste</span>
+    <a href="https://github.com/mavroudisv/plain-academic">Plain Academic</a>
+  </footer>
+
+</div><!-- /page -->
+
+<script>
+  const btns = document.querySelectorAll('.filter-btn');
+  const pubs = document.querySelectorAll('.pub');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      pubs.forEach(p => {
+        const tags = (p.dataset.tags || '').split(' ');
+        p.dataset.hidden = (f !== 'all' && !tags.includes(f)) ? 'true' : 'false';
+      });
+    });
+  });
+
+  // Scroll-spy for nav
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = ['about','teaching','supervision','publications','service'].map(id => document.getElementById(id));
+  function updateNav() {
+    const scrollY = window.scrollY + 80;
+    let current = sections[0];
+    sections.forEach(s => { if (s && s.offsetTop <= scrollY) current = s; });
+    navLinks.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + (current ? current.id : ''));
+    });
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();</script>
+
+</body>
 </html>
